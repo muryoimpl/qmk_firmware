@@ -16,7 +16,6 @@ enum layer_number {
   _QWERTY = 0,
   _FN,
   _ADJUST,
-  _FNC,
 };
 
 enum custom_keycodes {
@@ -36,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, RCTL(KC_Q),
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
-               TG(_FN), KC_LGUI,  KC_LALT,  KC_SPC,               KC_SPC, MO(_FNC),          KC_RALT, S(LWIN(SWIN(KC_DEL)))
+               TG(_FN), KC_LGUI,  KC_LALT,  KC_SPC,            KC_SPC,  MO(_ADJUST),      KC_RALT, S(LWIN(SWIN(KC_DEL)))
           //`---------------------------------------------|   |--------------------------------------------'
   ),
 
@@ -55,20 +54,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_ADJUST] = LAYOUT( /* Base */
-  //,-----------------------------------------------------|   |--------------------------------------------------------------------------------.
-  TG(_ADJUST), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   RESET,
-  //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     RGB_RST, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     RGB_TOG, RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     RGB_VAD, RGB_VAI, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX,
-  //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
-               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              XXXXXXX, XXXXXXX,          KC_STOP, XXXXXXX
-          //`---------------------------------------------|   |--------------------------------------------'
-  ),
-
-  [_FNC] = LAYOUT(
   //,-----------------------------------------------------|   |--------------------------------------------------------------------------------.
       KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
@@ -94,9 +79,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       break;
     case _ADJUST:
       rgblight_sethsv_at(HSV_PURPLE, 0);
-      break;
-    case _FNC:
-      rgblight_sethsv_at(HSV_RED, 0);
       break;
     default: //  for any other layers, or the default layer
       rgblight_sethsv_at(HSV_GREEN, 0);
