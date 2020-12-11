@@ -20,9 +20,8 @@ enum layer_number {
 
 enum custom_keycodes {
   RGB_RST = SAFE_RANGE,
-  C_MCR00,
-  C_MCR01,
-  C_MCR02,
+  MCR00,
+  MCR01,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -62,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    C_MCR00, C_MCR01, C_MCR02, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     MCR00,   MCR01,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX
           //`---------------------------------------------|   |--------------------------------------------'
@@ -109,20 +108,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             RGB_current_mode = rgblight_config.mode;
           }
         break;
-      case C_MCR00:
+      case MCR00:
           if (record->event.pressed) {
             SEND_STRING(":house:");
           }
+          result = true;
         break;
-      case C_MCR01:
+      case MCR01:
           if (record->event.pressed) {
             SEND_STRING(":end:");
           }
-        break;
-      case C_MCR02:
-          if (record->event.pressed) {
-            SEND_STRING(":rice:");
-          }
+          result = true;
         break;
     #endif
     default:
